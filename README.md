@@ -105,7 +105,9 @@ First, get familiar with what this code teaches.
 - 10% - At least four Git commits for the project (Initial, milestone, ..., milestone, final)
 - 10% - Notes in your GitHub Pages README.md about what you have learned
 
-# AWS Server
+# Server Setup
+
+## AWS Server
 
 1. Get an account
 1. Create an EC2 instance (a t3.micro should be fine)
@@ -114,11 +116,47 @@ First, get familiar with what this code teaches.
 1. Puchase a domain name using Route53
 1. Assign a DNS record to your server using Route53
 
-# Caddy
+## AMI
+
+Consider creating a public AMI that can be preloaded with all the software.
+
+## Node.js
+
+You need to install node.js on your server since that is used to run your services.
+
+```
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
+
+. ~/.nvm/nvm.sh
+
+nvm install --lts
+```
+
+## PM2
+
+We need to install [PM2](https://www.npmjs.com/package/pm2) so that your services can keep running even when you are not logged into the server.
+
+```
+sudo npm install pm2 -g
+
+```
+
+Useful commands for PM2 include
+
+- **pm2 ls** - List all of the hosted node processes
+- **pm2 monit** - Visual monitor
+- **pm2 start index.js -n simon-server** - Add a new process with an explicit name
+- **pm2 stop simon-server** - Stop a process
+- **pm2 restart simon-server** - Restart a process
+- **pm2 delete simon-server** - Delete a process from being hosted
+- **pm2 save** - Save the current processes across reboot
+- **pm2 reload all** - Reload all of the processes
+
+## Caddy
 
 Caddy is a web server that listens for incoming HTTP requests. Caddy then either serves up the requested static files or routes the request to another web server. This ability to route requests is called a `reverse proxy` and allows us to expose multiple web services (i.e. your project services) as a single external web service (i.e. Caddy).
 
-## Install
+### Install
 
 In order to install Caddy,
 
@@ -141,7 +179,7 @@ In order to install Caddy,
 
 [Tutorial on installation](https://www.hostnextra.com/kb/how-to-install-caddy-on-ubuntu-20-04/)
 
-## Important Caddy file locations
+### Important Caddy file locations
 
 In your ssh console window to your server view the contents of the following locaitons so you can be familiar with how Caddy installed.
 
@@ -149,7 +187,7 @@ In your ssh console window to your server view the contents of the following loc
 - **Caddy program**: /usr/bin/caddy
 - **Caddy website configuration file**: /etc/caddy/`Caddyfile`
 
-## Make it easy to know where your files are
+### Make it easy to know where your files are
 
 We want to make it easy to get to the files we need to configure Caddy and so we are going to create some linux symbolic links in our user directory so that we can easily find them.
 
@@ -167,7 +205,7 @@ sudo chown ubuntu /usr/share/caddy /usr/share/caddy/index.html
 ln -s /usr/share/caddy public_html
 ```
 
-## Modify the Caddyfile
+### Modify the Caddyfile
 
 The `Caddyfile` contains all of the information for controlling how Caddy hosts information.
 
