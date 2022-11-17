@@ -91,18 +91,20 @@ First, get familiar with what this code teaches.
 - In the `simon-server` repository create your own version of the project. Refer to the example class project repository if you get stuck.
 - Periodically commit and push your code to your repository as you hit different milestones. (4 commits are required for full credit.)
 - Change the footer link to point to your code repository. (e.g. https://github.com/yourname/simon-server)
+- As you make improvements to your server you can deploy the changes by running `deploy.sh`. You can copy `deploy.sh` from the class project repository. Take some time to understand how it works.
+  ```
+  ./deploy.sh -k ~/cs260.pem -h demo.cs260.click -s simon-server -p 3000
+  ```
 - Update the simon-server repository README.md to record and reflect on what you are learning.
-- When you have a working version run `register.sh` to setup your service on your production environment. You should only run this once.
-- As you make improvements to your server you can deploy the changes by running `deploy.sh`.
 - When you have completed your version. Do a final push of your code and deploy your final version to your production environment.
 - Make sure your project is visible from your production enviornment.
 - Submit the URL to your project on the production environment (e.g. https://yourhostname/simon-server) for grading using the Canvas assignment page.
 
 ## Grading Rubric
 
-- 30% - Project hosted from your production environment
+- 20% - Project hosted from your production environment
 - 30% - Working service endpoints
-- 20% - Application using service endpoints
+- 30% - Application using service endpoints
 - 10% - At least four Git commits for the project (Initial, milestone, ..., milestone, final)
 - 10% - Notes in your GitHub Pages README.md about what you have learned
 

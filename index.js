@@ -1,15 +1,19 @@
 const express = require("express");
 const app = express();
 
+// The service name and port. We use these to partition it from other running services when running in the production environment.
+const serviceName = "simon-new";
+const port = 3000;
+
 // JSON body parsing using built-in middleware
 app.use(express.json());
 
 // Server up the applications static content
-app.use("/simon-server", express.static("application"));
+app.use(`/${serviceName}`, express.static("application"));
 
 // Router for service endpoints
 var apiRouter = express.Router();
-app.use("/simon-server/api", apiRouter);
+app.use(`/${serviceName}/api`, apiRouter);
 
 // GetScores
 apiRouter.get("/scores", (_req, res) => {
@@ -22,13 +26,13 @@ apiRouter.post("/score", (req, res) => {
   res.send(scores);
 });
 
-// Redirect back to our applicaiton HTML if the path is unknown
+// Redirect back to the home page if the path is unknown
 app.use((_req, res) => {
-  res.redirect("/simon-server");
+  res.redirect(`/${serviceName}`);
 });
 
-app.listen(3000, () => {
-  console.log(`Listening on port 3000`);
+app.listen(port, () => {
+  console.log(`Listening on port ${port}`);
 });
 
 // updateScores considers a new score for inclusion in the high scores.
