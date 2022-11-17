@@ -1,0 +1,1 @@
+scp -r -i ~/keys/leesjensen/production.pem . ubuntu@demo.cs260.click:simon-server
