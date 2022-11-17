@@ -20,7 +20,7 @@ We will use Node.js and Express to create our HTTP server. This involves the fol
 
    // Router for service endpoints
    var apiRouter = express.Router();
-   app.use('/api', apiRouter);
+   app.use('/simon-server/api', apiRouter);
    apiRouter.get('/scores', (req, res) => {
      res.send(`high scores`);
    });
@@ -41,7 +41,7 @@ We will use Node.js and Express to create our HTTP server. This involves the fol
 
    ```Javascript
    async function loadScores() {
-     const response = await fetch("/api/scores")
+     const response = await fetch("/simon-server/api/scores")
      const scores = await response.json()
 
      // Modify the DOM to display the scores
@@ -91,9 +91,10 @@ First, get familiar with what this code teaches.
 - In the `simon-server` repository create your own version of the project. Refer to the example class project repository if you get stuck.
 - Periodically commit and push your code to your repository as you hit different milestones. (4 commits are required for full credit.)
 - Change the footer link to point to your code repository. (e.g. https://github.com/yourname/simon-server)
-- Update the simon-server repository README.md to record and reflect on what you learned.
-- When you have completed your version. Do a final push of your code.
-- Create a `deploy.sh` script to deploy your appplication to your production environment.
+- Update the simon-server repository README.md to record and reflect on what you are learning.
+- When you have a working version run `register.sh` to setup your service on your production environment. You should only run this once.
+- As you make improvements to your server you can deploy the changes by running `deploy.sh`.
+- When you have completed your version. Do a final push of your code and deploy your final version to your production environment.
 - Make sure your project is visible from your production enviornment.
 - Submit the URL to your project on the production environment (e.g. https://yourhostname/simon-server) for grading using the Canvas assignment page.
 

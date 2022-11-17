@@ -5,11 +5,11 @@ const app = express();
 app.use(express.json());
 
 // Server up the applications static content
-app.use(express.static("application"));
+app.use("/simon-server", express.static("application"));
 
 // Router for service endpoints
 var apiRouter = express.Router();
-app.use("/api", apiRouter);
+app.use("/simon-server/api", apiRouter);
 
 // GetScores
 apiRouter.get("/scores", (_req, res) => {
@@ -20,6 +20,11 @@ apiRouter.get("/scores", (_req, res) => {
 apiRouter.post("/score", (req, res) => {
   scores = updateScores(req.body, scores);
   res.send(scores);
+});
+
+// Redirect back to our applicaiton HTML if the path is unknown
+app.use((_req, res) => {
+  res.redirect("/simon-server");
 });
 
 app.listen(3000, () => {

@@ -109,7 +109,7 @@ class Game {
     const newScore = { name: userName, score: score, date: date };
 
     try {
-      const response = await fetch("/api/score", {
+      const response = await fetch("/simon-server/api/score", {
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify(newScore),
