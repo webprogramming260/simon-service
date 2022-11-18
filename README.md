@@ -93,7 +93,7 @@ First, get familiar with what this code teaches.
 - Change the footer link to point to your code repository. (e.g. https://github.com/yourname/simon-server)
 - As you make improvements to your server you can deploy the changes by running `deploy.sh`. You can copy `deploy.sh` from the class project repository. Take some time to understand how it works.
   ```
-  ./deploy.sh -k ~/cs260.pem -h demo.cs260.click -s simon-server -p 3000
+  ./deploy.sh -k <yourpemkey> -h <yourdomain> -s simon-server -p 3000
   ```
 - Update the simon-server repository README.md to record and reflect on what you are learning.
 - When you have completed your version. Do a final push of your code and deploy your final version to your production environment.
