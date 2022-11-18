@@ -119,4 +119,4 @@ First, get familiar with what this code teaches.
 - 30% - Working service endpoints
 - 30% - Application using service endpoints
 - 10% - At least four Git commits for the project (Initial, milestone, ..., milestone, final)
-- 10% - Notes in your GitHub Pages README.md about what you have learned
+- 10% - Notes in your repository README.md about what you have learned
