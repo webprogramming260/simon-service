@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 
 // The service name and port. We use these to partition it from other running services when running in the production environment.
-const serviceName = "simon-server";
+const serviceName = "simon-service";
 const port = 3000;
 
 // JSON body parsing using built-in middleware
