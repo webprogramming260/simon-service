@@ -24,3 +24,8 @@
 .author::before {
   content: " - ";
 }
+
+#picture img {
+  width: 100%;
+  height: 100%;
+}

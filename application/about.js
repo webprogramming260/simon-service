@@ -4,7 +4,10 @@
 function displayPicture(data) {
   const containerEl = document.querySelector("#picture");
 
-  const imgUrl = `https://picsum.photos/id/${data[0].id}/350/100?grayscale`;
+  const width = containerEl.offsetWidth;
+  const height = containerEl.offsetHeight;
+
+  const imgUrl = `https://picsum.photos/id/${data[0].id}/${width}/${height}?grayscale`;
   const imgEl = document.createElement("img");
   imgEl.setAttribute("src", imgUrl);
   containerEl.appendChild(imgEl);

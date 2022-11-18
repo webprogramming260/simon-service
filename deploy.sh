@@ -20,7 +20,7 @@ printf "\n-------------------------------\nDeploying $service to $hostname on in
 rm -rf dist
 mkdir dist
 cp -r application dist
-cp index.js dist
+cp *.js dist
 cp package* dist
 
 # Clear out the previous distribution on the target.
