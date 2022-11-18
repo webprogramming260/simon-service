@@ -47,7 +47,7 @@ else
   pm2 start index.js --name ${service}
   pm2 save
   cd ~
-  sudo sed -i '/file_server/a \\\n\treverse_proxy /${service}/* localhost:${port}' /etc/caddy/Caddyfile
+  sudo sed -i '/file_server/a \\\n\treverse_proxy /${service}* localhost:${port}' /etc/caddy/Caddyfile
   sudo service caddy restart
 fi
 
