@@ -4,12 +4,12 @@ class Button {
     this.sound = loadSound(soundUrl);
 
     this.press = async function (delayms = 500, playSound = true) {
-      el.style.filter = "brightness(100%)";
+      el.style.filter = 'brightness(100%)';
       if (playSound) {
         this.sound.play();
       }
       await delay(delayms);
-      el.style.filter = "brightness(50%)";
+      el.style.filter = 'brightness(50%)';
       await delay(100);
     };
   }
@@ -27,13 +27,13 @@ class Game {
     this.#allowPlayer = false;
     this.#sequence = [];
     this.#playerPlaybackPos = 0;
-    this.#mistakeSound = loadSound("error.mp3");
+    this.#mistakeSound = loadSound('error.mp3');
 
-    const sounds = ["sound1.mp3", "sound2.mp3", "sound3.mp3", "sound4.mp3"];
-    document.querySelectorAll(".game-button").forEach((el, i) => {
+    const sounds = ['sound1.mp3', 'sound2.mp3', 'sound3.mp3', 'sound4.mp3'];
+    document.querySelectorAll('.game-button').forEach((el, i) => {
       if (i < sounds.length) {
         this.#buttons.set(el.id, new Button(sounds[i], el));
-        el.style.filter = "brightness(50%)";
+        el.style.filter = 'brightness(50%)';
       }
     });
   }
@@ -64,7 +64,7 @@ class Game {
     this.#allowPlayer = false;
     this.#playerPlaybackPos = 0;
     this.#sequence = [];
-    this.#updateScore("--");
+    this.#updateScore('--');
     await this.#buttonDance(1);
     this.#addNote();
     await this.#playSequence(1000);
@@ -86,7 +86,7 @@ class Game {
   }
 
   #updateScore(score) {
-    const scoreEl = document.querySelector("#score");
+    const scoreEl = document.querySelector('#score');
     scoreEl.textContent = score;
   }
 
@@ -104,20 +104,20 @@ class Game {
   }
 
   async #saveScore(score) {
-    const userName = localStorage.getItem("userName") ?? "unknown";
+    const userName = localStorage.getItem('userName') ?? 'unknown';
     const date = new Date().toLocaleDateString();
     const newScore = { name: userName, score: score, date: date };
 
     try {
-      const response = await fetch("/simon-server/api/score", {
-        method: "POST",
-        headers: { "content-type": "application/json" },
+      const response = await fetch('/simon-server/api/score', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
         body: JSON.stringify(newScore),
       });
 
       // Store what the service gave us as the high scores
       const scores = await response.json();
-      localStorage.setItem("scores", JSON.stringify(scores));
+      localStorage.setItem('scores', JSON.stringify(scores));
     } catch {
       // If there was an error then just track scores locally
       this.#updateScoresLocal(newScore);
@@ -126,14 +126,14 @@ class Game {
 
   #updateScoresLocal(newScore) {
     let scores = [];
-    const scoresText = localStorage.getItem("scores");
+    const scoresText = localStorage.getItem('scores');
     if (scoresText) {
       scores = JSON.parse(scoresText);
     }
 
     let found = false;
     for (const [i, prevScore] of scores.entries()) {
-      if (score > prevScore.score) {
+      if (newScore > prevScore.score) {
         scores.splice(i, 0, newScore);
         found = true;
         break;
@@ -148,7 +148,7 @@ class Game {
       scores.length = 10;
     }
 
-    localStorage.setItem("scores", JSON.stringify(scores));
+    localStorage.setItem('scores', JSON.stringify(scores));
   }
 }
 
@@ -161,5 +161,5 @@ function delay(milliseconds) {
 }
 
 function loadSound(filename) {
-  return new Audio("assets/" + filename);
+  return new Audio('assets/' + filename);
 }
