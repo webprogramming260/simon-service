@@ -1,34 +1,33 @@
-const express = require("express");
+const express = require('express');
 const app = express();
 
-// The service name and port. We use these to partition it from other running services when running in the production environment.
-const serviceName = "simon-service";
-const port = 3000;
+// The service port. In production the application is statically hosted by the service on the same port.
+const port = process.env.SIMONSERVICEPORT || 3000;
 
 // JSON body parsing using built-in middleware
 app.use(express.json());
 
 // Server up the applications static content
-app.use(`/${serviceName}`, express.static("application"));
+app.use(express.static('application'));
 
 // Router for service endpoints
 var apiRouter = express.Router();
-app.use(`/${serviceName}/api`, apiRouter);
+app.use(`/api`, apiRouter);
 
 // GetScores
-apiRouter.get("/scores", (_req, res) => {
+apiRouter.get('/scores', (_req, res) => {
   res.send(scores);
 });
 
 // SubmitScore
-apiRouter.post("/score", (req, res) => {
+apiRouter.post('/score', (req, res) => {
   scores = updateScores(req.body, scores);
   res.send(scores);
 });
 
 // Redirect back to the home page if the path is unknown
 app.use((_req, res) => {
-  res.redirect(`/${serviceName}`);
+  res.redirect(`/`);
 });
 
 app.listen(port, () => {
