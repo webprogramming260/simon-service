@@ -53,8 +53,8 @@ footer a {
   position: absolute;
   min-width: 350px;
   min-height: 350px;
-  max-width: 90vw;
-  max-height: 90vh;
+  max-width: min(80vmin, 1000px);
+  max-height: min(80vmin, 1000px);
 }
 
 .button-container {
@@ -142,11 +142,5 @@ footer a {
   }
   main {
     flex: 1 100vh;
-  }
-  .game {
-    max-width: 90vh;
-    max-height: 90vh;
-    min-width: 90vh;
-    min-height: 90vh;
   }
 }
