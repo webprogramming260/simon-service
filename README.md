@@ -93,6 +93,9 @@ You can view this application running here: [Example Simon Service](https://demo
 First, get familiar with what this code teaches.
 
 - Clone this repository to your development machine.
+  ```sh
+  git clone https://github.com/webprogramming260/simon-service.git
+  ```
 - Review the code and get comfortable with everything it represents.
 - View the code in your browser by hosting it from a VS Code debug session.
 - Make modifications to the code as desired. Experiment and see what happens.
