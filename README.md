@@ -104,14 +104,18 @@ First, get familiar with what this code teaches.
 - In the `simon-service` repository create your own version of the project. Refer to the example class project repository if you get stuck.
 - Periodically commit and push your code to your repository as you hit different milestones. (4 commits are required for full credit.)
 - Change the footer link to point to your code repository. (e.g. https://github.com/yourname/simon-service)
-- As you make improvements to your service you can deploy the changes by running `deploy.sh`. You can copy `deploy.sh` from the class project repository. Take some time to understand how it works.
-  ```
+- Periodically deploy to your production environment using a copy of the `deploy.sh` script found in the [example class project](https://github.com/webprogramming260/simon-service/blob/main/deploy.sh). Take some time to understand how it works.
+
+  ```sh
   ./deploy.sh -k <yourpemkey> -h <yourdomain> -s simon-service -p 3000
   ```
+
+  ⚠ **NOTE** - The deployment script for this project is different than pervious deployment scripts since needs a port to assign the service to. Each of the following projects will require a different port.
+
 - Update the simon-service repository README.md to record and reflect on what you are learning.
 - When you have completed your version. Do a final push of your code and deploy your final version to your production environment.
-- Make sure your project is visible from your production enviornment.
-- Submit the URL to your project on the production environment (e.g. https://yourhostname/simon-service) for grading using the Canvas assignment page.
+- Make sure your project is visible from your production environment (e.g. https://simon-service.yourhostname).
+- Submit the URL to your project on the production environment for grading using the Canvas assignment page.
 
 ## Grading Rubric
 
