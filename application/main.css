@@ -20,24 +20,24 @@ footer {
 }
 
 menu {
-    flex: 1;
-    display: flex;
-    /*  overwrite Bootstrap so the menu does not wrap */
-    flex-direction: row !important;
-    list-style: none;
+  flex: 1;
+  display: flex;
+  /*  overwrite Bootstrap so the menu does not wrap */
+  flex-direction: row !important;
+  list-style: none;
 }
 
 .navbar-brand {
-    padding-left:  .3em;
-    border-bottom: solid rgb(182, 182, 182) thin;
+  padding-left: 0.3em;
+  border-bottom: solid rgb(182, 182, 182) thin;
 }
 
 menu .nav-item {
-    padding: 0 .3em;
+  padding: 0 0.3em;
 }
 
 footer a {
-    float:right;
+  float: right;
 }
 
 #count {
@@ -53,8 +53,8 @@ footer a {
   position: absolute;
   min-width: 350px;
   min-height: 350px;
-  max-width: 900px;
-  max-height: 900px;
+  max-width: 90vw;
+  max-height: 90vh;
 }
 
 .button-container {
@@ -107,24 +107,24 @@ footer a {
 }
 
 .game-name {
-    font-size: 2em;
-    font-weight: bold;
-    margin-bottom: .5em;
+  font-size: 2em;
+  font-weight: bold;
+  margin-bottom: 0.5em;
 }
 
 .score {
-    position: absolute;
-    text-align: center;
-    font-size: 20px;
-    font-family: monospace;
-    font-weight: bold;
-    color: red;
-    cursor: default;
-    width: 50px;
-    height: 30px;
-    border-radius: 10px;
-    border: solid thin rgb(117, 0, 0);
-    background-color: #300;
+  position: absolute;
+  text-align: center;
+  font-size: 20px;
+  font-family: monospace;
+  font-weight: bold;
+  color: red;
+  cursor: default;
+  width: 50px;
+  height: 30px;
+  border-radius: 10px;
+  border: solid thin rgb(117, 0, 0);
+  background-color: #300;
 }
 
 .center {
@@ -133,21 +133,20 @@ footer a {
   transform: translateX(-50%) translateY(-50%);
 }
 
-
-@media  (max-height: 600px) {
-    header {
-        display:none;
-    }
-    footer {
-        display:none;
-    }
-    main {
-        flex: 1 100vh;
-    }
-    .game {
-        max-width: 90vh;
-        max-height: 90vh;      
-        min-width: 90vh;
-        min-height: 90vh;
-         }
+@media (max-height: 600px) {
+  header {
+    display: none;
+  }
+  footer {
+    display: none;
+  }
+  main {
+    flex: 1 100vh;
+  }
+  .game {
+    max-width: 90vh;
+    max-height: 90vh;
+    min-width: 90vh;
+    min-height: 90vh;
+  }
 }
