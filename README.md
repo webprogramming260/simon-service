@@ -110,7 +110,7 @@ First, get familiar with what this code teaches.
 - Periodically deploy to your production environment using a copy of the `deploy.sh` script found in the [example class project](https://github.com/webprogramming260/simon-service/blob/main/deploy.sh). Take some time to understand how it works.
 
   ```sh
-  ./deploy.sh -k <yourpemkey> -h <yourdomain> -s simon-service -p 3000
+  ./deploy.sh -k <yourpemkey> -h <yourdomain> -s simon-service -p 3001
   ```
 
   ⚠ **NOTE** - The deployment script for this project is different than pervious deployment scripts since needs a port to assign the service to. Each of the following projects will require a different port.
