@@ -22,7 +22,7 @@ We will use Node.js and Express to create our HTTP service. This involves the fo
     // JSON body parsing using built-in middleware
     app.use(express.json());
 
-    // Server up the applications static content
+    // Server up the application's static content
     app.use(`/${serviceName}`, express.static("application"));
 
     // Router for service endpoints
@@ -40,9 +40,9 @@ We will use Node.js and Express to create our HTTP service. This involves the fo
       res.send(scores);
     });
 
-    // Redirect back to the home page if the path is unknown
+    // Return the application's default page if the path is unknown
     app.use((_req, res) => {
-      res.redirect(`/${serviceName}`);
+      res.sendFile('index.html', { root: 'application' });
     });
 
     app.listen(port, () => {
