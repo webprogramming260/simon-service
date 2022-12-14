@@ -5,7 +5,7 @@ This demonstrates creating an HTTP service that provides service endpoints. We u
 We will use Node.js and Express to create our HTTP service. This involves the following steps.
 
 1. Create a project directory by cloning a new GitHub repository.
-1. Within the directroy run `npm init`. This configures the directory to work with **node.js**.
+1. Within the directory run `npm init`. This configures the directory to work with **node.js**.
 1. Modify or create `.gitignore` to ignore `node_modules`.
 1. Install the Express package by running `npm install express`. This will supply the Express HTTP server module.
 1. Create a file named `index.js` in the root of the project. This is the entry point that **node.js** will call.
