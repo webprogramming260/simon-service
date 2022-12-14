@@ -86,7 +86,7 @@ curl -X POST /api/score -d '{"name":"Harvey", "score":"337", "date":"2022/11/20"
 ]}
 ```
 
-You can view this application running here: [Example Simon Service](https://demo.cs260.click/simon-service)
+You can view this application running here: [Example Simon Service](https://simon-service.cs260.click)
 
 ## Study this code
 
