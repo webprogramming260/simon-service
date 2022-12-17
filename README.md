@@ -1,10 +1,35 @@
 # simon-service
 
-This demonstrates creating a web service that provides service endpoints. We use this to provide endpoints for getting and updating the scores.
+This demonstrates creating a web service that provides service endpoints and uses some third party endpoints. We use this to display inspirational quotes on the about page, and provide endpoints for getting and updating the scores.
 
 We will use Node.js and Express to create our HTTP service.
 
 You can view this application running here: [Example Simon Service](https://simon-service.cs260.click)
+
+## Third party endpoints
+
+The about.js file contains code for making calls to third party endpoints using fetch. We make one call to `picsum.photos` to get a random picture and another `quotable.io` to get a random quote. Once the endpoint asynchronously return, the DOM is updated with the requested data. Here is an example of the quote endpoint call.
+
+```js
+function displayQuote(data) {
+  fetch('https://api.quotable.io/random')
+    .then((response) => response.json())
+    .then((data) => {
+      const containerEl = document.querySelector('#quote');
+
+      const quoteEl = document.createElement('p');
+      quoteEl.classList.add('quote');
+      const authorEl = document.createElement('p');
+      authorEl.classList.add('author');
+
+      quoteEl.textContent = data.content;
+      authorEl.textContent = data.author;
+
+      containerEl.appendChild(quoteEl);
+      containerEl.appendChild(authorEl);
+    });
+}
+```
 
 ## Service endpoint definitions
 
