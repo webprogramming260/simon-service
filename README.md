@@ -1,11 +1,44 @@
 # simon-service
 
-This demonstrates creating an HTTP service that provides service endpoints. We use this to provide endpoints for getting and updating the scores.
+This demonstrates creating a web service that provides service endpoints. We use this to provide endpoints for getting and updating the scores.
 
-We will use Node.js and Express to create our HTTP service. This involves the following steps.
+We will use Node.js and Express to create our HTTP service.
 
-1. Create a project directory by cloning a new GitHub repository.
-1. Within the directory run `npm init`. This configures the directory to work with **node.js**.
+You can view this application running here: [Example Simon Service](https://simon-service.cs260.click)
+
+## Service endpoint definitions
+
+Here is our design for the two endpoints that Simon uses.
+
+**GetScores** - Get the latest high scores.
+
+```sh
+curl -X GET /api/scores
+
+#Response
+{ "scores":[
+  {"name":"Harvey", "score":"337", "date":"2022/11/20"},
+  {"name":"도윤 이", "score":"95", "date":"2019/05/20"}
+]}
+```
+
+**SubmitScore** - Submit a score for consideration in the list of high scores.
+
+```sh
+curl -X POST /api/score -d '{"name":"Harvey", "score":"337", "date":"2022/11/20"}'
+
+#Response
+{ "scores":[
+  {"name":"Harvey", "score":"337", "date":"2022/11/20"},
+  {"name":"도윤 이", "score":"95", "date":"2019/05/20"}
+]}
+```
+
+## Steps to convert Simon to a service
+
+Converting Simon to a service involved the following steps.
+
+1. Within the project directory run `npm init`. This configures the directory to work with **node.js**.
 1. Modify or create `.gitignore` to ignore `node_modules`.
 1. Install the Express package by running `npm install express`. This will supply the Express HTTP server module.
 1. Create a file named `index.js` in the root of the project. This is the entry point that **node.js** will call.
@@ -50,7 +83,7 @@ We will use Node.js and Express to create our HTTP service. This involves the fo
     });
    ```
 
-1. Modify the simon-javascript application code to make service endpoint requests to our newly created HTTP service code.
+1. Modify the Simon application code to make service endpoint requests to our newly created HTTP service code.
 
    ```Javascript
    async function loadScores() {
@@ -60,39 +93,11 @@ We will use Node.js and Express to create our HTTP service. This involves the fo
      // Modify the DOM to display the scores
    ```
 
-## Service endpoint definitions
-
-**GetScores** - Get the latest high scores.
-
-```sh
-curl -X GET /api/scores
-
-#Response
-{ "scores":[
-  {"name":"Harvey", "score":"337", "date":"2022/11/20"},
-  {"name":"도윤 이", "score":"95", "date":"2019/05/20"}
-]}
-```
-
-**SubmitScore** - Submit a score for consideration in the list of high scores.
-
-```sh
-curl -X POST /api/score -d '{"name":"Harvey", "score":"337", "date":"2022/11/20"}'
-
-#Response
-{ "scores":[
-  {"name":"Harvey", "score":"337", "date":"2022/11/20"},
-  {"name":"도윤 이", "score":"95", "date":"2019/05/20"}
-]}
-```
-
-You can view this application running here: [Example Simon Service](https://simon-service.cs260.click)
-
 ## Study this code
 
-First, get familiar with what this code teaches.
+Get familiar with what the example code teaches.
 
-- Clone this repository to your development machine.
+- Clone the repository to your development environment.
   ```sh
   git clone https://github.com/webprogramming260/simon-service.git
   ```
@@ -102,23 +107,28 @@ First, get familiar with what this code teaches.
 
 ## Make your own version
 
-- Create a new GitHub repository named `simon-service`.
-- Clone the repository to your development environment.
-- In the `simon-service` repository create your own version of the project. Refer to the example class project repository if you get stuck.
+- Using VS Code, open the `simon` directory for the repository you used for the last Simon assignment.
+- Modify the project to turn it into a web service. Refer to the example class project repository for guidance. Remember that you do not need to recreate an original work. Just focus on learning the concepts that the example project provides. However, you will learn more if you type everything out, and not just copy and paste the code.
+- Set the footer link to point to your code repository. (e.g. https://github.com/yourname/simon)
 - Periodically commit and push your code to your repository as you hit different milestones. (4 commits are required for full credit.)
-- Change the footer link to point to your code repository. (e.g. https://github.com/yourname/simon-service)
-- Periodically deploy to your production environment using a copy of the `deploy.sh` script found in the [example class project](https://github.com/webprogramming260/simon-service/blob/main/deploy.sh). Take some time to understand how it works.
+- Periodically deploy to your production environment using a copy of the `deploy.sh` script found in the [example class project](https://github.com/webprogramming260/simon-javascript/blob/main/deploy.sh). Take some time to understand how it works.
 
   ```sh
-  ./deploy.sh -k <yourpemkey> -h <yourdomain> -s simon-service -p 3001
+  ./deploy.sh -k <yourpemkey> -h <yourdomain> -s simon -p 3000
   ```
 
-  ⚠ **NOTE** - The deployment script for this project is different than pervious deployment scripts since needs a port to assign the service to. Each of the following projects will require a different port.
+  For example,
 
-- Update the simon-service repository README.md to record and reflect on what you are learning.
-- When you have completed your version. Do a final push of your code and deploy your final version to your production environment.
-- Make sure your project is visible from your production environment (e.g. https://simon-service.yourhostname).
-- Submit the URL to your project on the production environment for grading using the Canvas assignment page.
+  ```sh
+  ./deploy.sh -k ~/keys/production.pem -h yourdomain.click -s simon -p 3000
+  ```
+
+  ⚠ **NOTE** - The deployment script for this project is different than pervious deployment scripts since needs a port to assign the service to. Each of the following projects will require a different port. When you use this script to deploy your start up project make sure you use a different port so that it does not conflict with the port used for the Simon project. Port 4000 is suggested.
+
+- Update your `simon` repository README.md to record and reflect on what you learned.
+- When you have completed your version. Do a final push of your code and deploy to your production environment using the `deploy.sh` script.
+- Make sure your project is visible from your production environment (e.g. https://simon.yourdomain.click).
+- Submit the URL to your production environment for grading using the Canvas assignment page.
 
 ## Grading Rubric
 
