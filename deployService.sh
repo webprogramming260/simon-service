@@ -10,7 +10,7 @@ done
 
 if [[ -z "$key" || -z "$hostname" || -z "$service" || -z "$port" ]]; then
     printf "\nMissing required parameter.\n"
-    printf "  syntax: deploy.sh -k <pem key file> -h <hostname> -s <service> -p <port>\n\n"
+    printf "  syntax: deployService.sh -k <pem key file> -h <hostname> -s <service> -p <port>\n\n"
     exit 1
 fi
 
