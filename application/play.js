@@ -36,6 +36,9 @@ class Game {
         el.style.filter = 'brightness(50%)';
       }
     });
+
+    const playerNameEl = document.querySelector('.player-name');
+    playerNameEl.textContent = this.#getPlayerName();
   }
 
   async pressButton(button) {
@@ -80,6 +83,10 @@ class Game {
     }
   }
 
+  #getPlayerName() {
+    return localStorage.getItem('userName') ?? 'Mystery player';
+  }
+
   #addNote() {
     const btn = this.#getRandomButton();
     this.#sequence.push(btn);
@@ -104,7 +111,7 @@ class Game {
   }
 
   async #saveScore(score) {
-    const userName = localStorage.getItem('userName') ?? 'unknown';
+    const userName = this.#getPlayerName();
     const date = new Date().toLocaleDateString();
     const newScore = { name: userName, score: score, date: date };
 
