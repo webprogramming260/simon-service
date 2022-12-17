@@ -3,12 +3,12 @@ class Button {
     this.el = el;
     this.sound = loadSound(soundUrl);
 
-    this.press = async function (delayms = 500, playSound = true) {
+    this.press = async function (delayMs = 500, playSound = true) {
       el.style.filter = 'brightness(100%)';
       if (playSound) {
         this.sound.play();
       }
-      await delay(delayms);
+      await delay(delayMs);
       el.style.filter = 'brightness(50%)';
       await delay(100);
     };
@@ -71,9 +71,9 @@ class Game {
     this.#allowPlayer = true;
   }
 
-  async #playSequence(delayms = 0) {
-    if (delayms > 0) {
-      await delay(delayms);
+  async #playSequence(delayMs = 0) {
+    if (delayMs > 0) {
+      await delay(delayMs);
     }
     for (const btn of this.#sequence) {
       await btn.press();
@@ -99,8 +99,8 @@ class Game {
   }
 
   #getRandomButton() {
-    let btns = Array.from(this.#buttons.values());
-    return btns[Math.floor(Math.random() * this.#buttons.size)];
+    let buttons = Array.from(this.#buttons.values());
+    return buttons[Math.floor(Math.random() * this.#buttons.size)];
   }
 
   async #saveScore(score) {
