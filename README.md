@@ -1,6 +1,6 @@
 # simon-service
 
-This demonstrates creating a web service that provides service endpoints and uses some third party endpoints. We use this to display inspirational quotes on the about page, and provide endpoints for getting and updating the scores.
+This deliverable demonstrates creating a web service that provides service endpoints and uses some third party endpoints. We use this to display inspirational quotes on the about page, and provide endpoints for getting and updating the scores.
 
 We will use Node.js and Express to create our HTTP service.
 
