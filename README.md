@@ -1,39 +1,14 @@
 # simon-service
 
-This deliverable demonstrates creating a web service that provides service endpoints and uses some third party endpoints. We use this to display inspirational quotes on the about page, and provide endpoints for getting and updating the scores.
+This deliverable demonstrates converting the JavaScript application into a web application by implementing a web service that listens on a network port for HTTP requests. The web service provide endpoints for getting and updating the scores. The application also uses a couple third party endpoints to display inspirational quotes on the about page and show a random header image.
 
 We will use Node.js and Express to create our HTTP service.
 
 You can view this application running here: [Example Simon Service](https://simon-service.cs260.click)
 
-## Third party endpoints
-
-The about.js file contains code for making calls to third party endpoints using fetch. We make one call to `picsum.photos` to get a random picture and another `quotable.io` to get a random quote. Once the endpoint asynchronously return, the DOM is updated with the requested data. Here is an example of the quote endpoint call.
-
-```js
-function displayQuote(data) {
-  fetch('https://api.quotable.io/random')
-    .then((response) => response.json())
-    .then((data) => {
-      const containerEl = document.querySelector('#quote');
-
-      const quoteEl = document.createElement('p');
-      quoteEl.classList.add('quote');
-      const authorEl = document.createElement('p');
-      authorEl.classList.add('author');
-
-      quoteEl.textContent = data.content;
-      authorEl.textContent = data.author;
-
-      containerEl.appendChild(quoteEl);
-      containerEl.appendChild(authorEl);
-    });
-}
-```
-
 ## Service endpoint definitions
 
-Here is our design for the two endpoints that Simon uses.
+Here is our design, documented using curl commands, for the two endpoints that the Simon web service provides.
 
 **GetScores** - Get the latest high scores.
 
@@ -59,60 +34,84 @@ curl -X POST /api/score -d '{"name":"Harvey", "score":"337", "date":"2022/11/20"
 ]}
 ```
 
+## Third party endpoints
+
+The about.js file contains code for making calls to third party endpoints using fetch. We make one call to `picsum.photos` to get a random picture and another to `quotable.io` to get a random quote. Once the endpoint asynchronously returns, the DOM is updated with the requested data. Here is an example of the quote endpoint call.
+
+```js
+function displayQuote(data) {
+  fetch('https://api.quotable.io/random')
+    .then((response) => response.json())
+    .then((data) => {
+      const containerEl = document.querySelector('#quote');
+
+      const quoteEl = document.createElement('p');
+      quoteEl.classList.add('quote');
+      const authorEl = document.createElement('p');
+      authorEl.classList.add('author');
+
+      quoteEl.textContent = data.content;
+      authorEl.textContent = data.author;
+
+      containerEl.appendChild(quoteEl);
+      containerEl.appendChild(authorEl);
+    });
+}
+```
+
 ## Steps to convert Simon to a service
 
 Converting Simon to a service involved the following steps.
 
-1. Within the project directory run `npm init`. This configures the directory to work with **node.js**.
+1. Within the project directory run `npm init -y`. This configures the directory to work with **node.js**.
 1. Modify or create `.gitignore` to ignore `node_modules`.
-1. Install the Express package by running `npm install express`. This will supply the Express HTTP server module.
-1. Create a file named `index.js` in the root of the project. This is the entry point that **node.js** will call.
+1. Install the Express package by running `npm install express`. This will write the Express package dependency in the `package.json` file and install all the Express code to the `node_modules` directory.
+1. Create a file named `index.js` in the root of the project. This is the entry point that **node.js** will call when you run your web service.
 1. Add the basic Express JavaScript code needed to host the application static content and the desired endpoints.
 
-   ```Javascript
-    const express = require("express");
-    const app = express();
+   ```js
+   const express = require('express');
+   const app = express();
 
-    // The service name and port. We use these to partition it from other running services when running in the production environment.
-    const serviceName = "simon-server";
-    const port = 3000;
+   // The service port. In production the application is statically hosted by the service on the same port.
+   const port = process.argv.length > 2 ? process.argv[2] : 3000;
 
-    // JSON body parsing using built-in middleware
-    app.use(express.json());
+   // JSON body parsing using built-in middleware
+   app.use(express.json());
 
-    // Server up the application's static content
-    app.use(`/${serviceName}`, express.static("application"));
+   // Server up the application's static content
+   app.use(express.static('application'));
 
-    // Router for service endpoints
-    var apiRouter = express.Router();
-    app.use(`/${serviceName}/api`, apiRouter);
+   // Router for service endpoints
+   var apiRouter = express.Router();
+   app.use(`/api`, apiRouter);
 
-    // GetScores
-    apiRouter.get("/scores", (_req, res) => {
-      res.send(scores);
-    });
+   // GetScores
+   apiRouter.get('/scores', (_req, res) => {
+     res.send(scores);
+   });
 
-    // SubmitScore
-    apiRouter.post("/score", (req, res) => {
-      scores = updateScores(req.body, scores);
-      res.send(scores);
-    });
+   // SubmitScore
+   apiRouter.post('/score', (req, res) => {
+     scores = updateScores(req.body, scores);
+     res.send(scores);
+   });
 
-    // Return the application's default page if the path is unknown
-    app.use((_req, res) => {
-      res.sendFile('index.html', { root: 'application' });
-    });
+   // Return the application's default page if the path is unknown
+   app.use((_req, res) => {
+     res.sendFile('index.html', { root: 'application' });
+   });
 
-    app.listen(port, () => {
-      console.log(`Listening on port ${port}`);
-    });
+   app.listen(port, () => {
+     console.log(`Listening on port ${port}`);
+   });
    ```
 
 1. Modify the Simon application code to make service endpoint requests to our newly created HTTP service code.
 
-   ```Javascript
+   ```js
    async function loadScores() {
-     const response = await fetch("/simon-service/api/scores")
+     const response = await fetch("/api/scores")
      const scores = await response.json()
 
      // Modify the DOM to display the scores
@@ -148,7 +147,7 @@ Get familiar with what the example code teaches.
   ./deployService.sh -k ~/keys/production.pem -h yourdomain.click -s simon -p 3000
   ```
 
-  ⚠ **NOTE** - The deployment script for this project is different than pervious deployment scripts since needs a port to assign the service to. Each of the following projects will require a different port. When you use this script to deploy your start up project make sure you use a different port so that it does not conflict with the port used for the Simon project. Port 4000 is suggested.
+  ⚠ **NOTE** - The deployment script for this project is different than pervious deployment scripts since it needs a port to assign the service to. Each of the Simon projects will use port 3000. When you use this script to deploy your start up project use port 4000 so that it does not conflict with the port used for the Simon project.
 
 - Update your `start up` repository README.md to record and reflect on what you learned.
 - When you have completed your version. Do a final push of your code and deploy to your production environment using the `deployService.sh` script.
@@ -161,4 +160,4 @@ Get familiar with what the example code teaches.
 - 30% - Working service endpoints
 - 30% - Application using service endpoints
 - 10% - At least four Git commits for the project (Initial, milestone, ..., milestone, final)
-- 10% - Notes in your repository README.md about what you have learned
+- 10% - Notes in your start up repository README.md about what you have learned
