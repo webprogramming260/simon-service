@@ -138,13 +138,13 @@ Get familiar with what the example code teaches.
 - Periodically deploy to your production environment using a copy of the `deployService.sh` script found in the [example class project](https://github.com/webprogramming260/simon-javascript/blob/main/deployService.sh). Take some time to understand how it works.
 
   ```sh
-  ./deployService.sh -k <yourpemkey> -h <yourdomain> -s simon -p 3000
+  ./deployService.sh -k <yourpemkey> -h <yourdomain> -s simon
   ```
 
   For example,
 
   ```sh
-  ./deployService.sh -k ~/keys/production.pem -h yourdomain.click -s simon -p 3000
+  ./deployService.sh -k ~/keys/production.pem -h yourdomain.click -s simon
   ```
 
   ⚠ **NOTE** - The deployment script for this project is different than pervious deployment scripts since it needs a port to assign the service to. Each of the Simon projects will use port 3000. When you use this script to deploy your start up project use port 4000 so that it does not conflict with the port used for the Simon project.
