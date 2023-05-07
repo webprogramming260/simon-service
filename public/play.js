@@ -1,8 +1,8 @@
 const btnDescriptions = [
-  { file: 'sound1.mp3', hue: 120 },
-  { file: 'sound2.mp3', hue: 0 },
-  { file: 'sound3.mp3', hue: 60 },
-  { file: 'sound4.mp3', hue: 240 },
+  {file: 'sound1.mp3', hue: 120},
+  {file: 'sound2.mp3', hue: 0},
+  {file: 'sound3.mp3', hue: 60},
+  {file: 'sound4.mp3', hue: 240},
 ];
 
 class Button {
@@ -129,12 +129,12 @@ class Game {
   async saveScore(score) {
     const userName = this.getPlayerName();
     const date = new Date().toLocaleDateString();
-    const newScore = { name: userName, score: score, date: date };
+    const newScore = {name: userName, score: score, date: date};
 
     try {
       const response = await fetch('/api/score', {
         method: 'POST',
-        headers: { 'content-type': 'application/json' },
+        headers: {'content-type': 'application/json'},
         body: JSON.stringify(newScore),
       });
 
@@ -188,3 +188,10 @@ function delay(milliseconds) {
 function loadSound(filename) {
   return new Audio('assets/' + filename);
 }
+
+setInterval(() => {
+  const score = Math.floor(Math.random() * 3000);
+  const chatText = document.querySelector('#player-messages');
+  chatText.innerHTML =
+    `<div class="event"><span class="player-event">Eich</span> scored ${score}</div>` + chatText.innerHTML;
+}, 5000);
