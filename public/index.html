@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Simon Service</title>
 
-    <script src="login.js"></script>
+    <script defer src="login.js"></script>
     <link rel="stylesheet" href="main.css" />
 
     <link
@@ -23,13 +23,13 @@
           <li class="nav-item">
             <a class="nav-link active" href="index.html">Home</a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item logged-in">
             <a class="nav-link" href="play.html">Play</a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item logged-in">
             <a class="nav-link" href="scores.html">Scores</a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item logged-in">
             <a class="nav-link" href="about.html">About</a>
           </li>
         </menu>
@@ -38,12 +38,25 @@
 
     <main class="container-fluid bg-secondary text-center">
       <div>
-        <h1>Welcome</h1>
-        <p>Login to play</p>
-        <div>
-          <input type="text" id="name" placeholder="Your name here" />
-          <button class="btn btn-primary" onclick="login()">Login</button>
-        </div>
+        <h1>Welcome to Simon</h1>
+        <form method="get" action="play.html">
+          <div class="logged-out" style="display: hidden">
+            <div class="input-group mb-3">
+              <span class="input-group-text">@</span>
+              <input class="form-control" id="name" type="text" placeholder="your@email.com" />
+            </div>
+            <div class="input-group mb-3">
+              <span class="input-group-text">🔒</span>
+              <input class="form-control" type="password" placeholder="password" />
+            </div>
+            <button type="submit" class="btn btn-primary" onclick="login(event)">Login</button>
+            <button type="submit" class="btn btn-secondary" onclick="login(event)">Create</button>
+          </div>
+          <div class="logged-in" style="display: hidden">
+            <button type="submit" class="btn btn-primary">Play</button>
+            <button type="submit" class="btn btn-secondary" onclick="logout(event)">Logout</button>
+          </div>
+        </form>
       </div>
     </main>
 
