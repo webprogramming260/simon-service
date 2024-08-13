@@ -16,7 +16,7 @@ function displayPicture() {
 }
 
 function displayQuote(data) {
-  fetch('https://api.quotable.io/random')
+  fetch('https://quote.cs260.click')
     .then((response) => response.json())
     .then((data) => {
       const containerEl = document.querySelector('#quote');
@@ -26,7 +26,7 @@ function displayQuote(data) {
       const authorEl = document.createElement('p');
       authorEl.classList.add('author');
 
-      quoteEl.textContent = data.content;
+      quoteEl.textContent = data.quote;
       authorEl.textContent = data.author;
 
       containerEl.appendChild(quoteEl);
