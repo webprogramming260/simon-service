@@ -2,7 +2,7 @@ import React from 'react';
 import './about.css';
 
 export function About(props) {
-  const [imageUrl, setImageUrl] = React.useState('');
+  const [imageUrl, setImageUrl] = React.useState('data:image/gif;base64,R0lGODlhAQABAIAAAAUEBAAAACwAAAAAAQABAAACAkQBADs=');
   const [quote, setQuote] = React.useState('Loading...');
   const [quoteAuthor, setQuoteAuthor] = React.useState('unknown');
 
@@ -30,17 +30,11 @@ export function About(props) {
       .catch();
   }, []);
 
-  let imgEl = '';
-
-  if (imageUrl) {
-    imgEl = <img src={imageUrl} alt='stock background' />;
-  }
-
   return (
     <main className='container-fluid bg-secondary text-center'>
       <div>
         <div id='picture' className='picture-box'>
-          {imgEl}
+          <img src={imageUrl} alt='stock background' />
         </div>
 
         <p>Simon is a repetitive memory game where you follow the demonstrated color sequence until you make a mistake. The longer the sequence you repeat, the greater your score.</p>

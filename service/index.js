@@ -2,6 +2,7 @@ const express = require('express');
 const uuid = require('uuid');
 const app = express();
 
+// The scores and users are saved in memory and disappear whenever the service is restarted.
 let users = {};
 let scores = [];
 
@@ -84,7 +85,6 @@ app.listen(port, () => {
 });
 
 // updateScores considers a new score for inclusion in the high scores.
-// The high scores are saved in memory and disappear whenever the service is restarted.
 function updateScores(newScore, scores) {
   let found = false;
   for (const [i, prevScore] of scores.entries()) {
