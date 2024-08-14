@@ -44,9 +44,9 @@ apiRouter.post('/auth/login', async (req, res) => {
   res.status(401).send({ msg: 'Unauthorized' });
 });
 
-// DeleteAuth token if stored in cookie
+// DeleteAuth logout a user
 apiRouter.delete('/auth/logout', (req, res) => {
-  const user = users[req.body.email];
+  const user = Object.values(users).find((u) => u.token === req.body.token);
   if (user) {
     delete user.token;
   }
@@ -55,9 +55,9 @@ apiRouter.delete('/auth/logout', (req, res) => {
 
 // GetUser returns information about a user
 apiRouter.get('/user/:email', async (req, res) => {
-  const user = users[req.body.email];
+  const user = users[req.params.email];
   if (user) {
-    res.send({ email: user.email, authenticated: token === user.token });
+    res.send({ email: user.email, authenticated: !!user.token });
     return;
   }
   res.status(404).send({ msg: 'Unknown' });
