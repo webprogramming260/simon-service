@@ -54,16 +54,6 @@ apiRouter.delete('/auth/logout', (req, res) => {
   res.status(204).end();
 });
 
-// GetUser returns information about a user
-apiRouter.get('/user/:email', async (req, res) => {
-  const user = users[req.params.email];
-  if (user) {
-    res.send({ email: user.email, authenticated: !!user.token });
-    return;
-  }
-  res.status(404).send({ msg: 'Unknown' });
-});
-
 // GetScores
 apiRouter.get('/scores', (_req, res) => {
   res.send(scores);
