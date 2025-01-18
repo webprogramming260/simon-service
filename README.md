@@ -117,3 +117,4 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 - [x] **Calls to third party endpoints** - About page calls `quote.cs260.click`, renders the resulting JSON with React.
 - [x] **Backend service endpoints** - Simple endpoints in `service/index` for auth and scores.
 - [x] **Frontend calls service endpoints** - All mocked functionality removed from the frontend and replaced with calls to the service.
+- [x] **Supports registration, login, logout, and restricted endpoint** - Fully support authentication and restrict access to scores.
